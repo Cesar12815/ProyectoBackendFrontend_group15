@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  archives  Archive[]
+  notes     Note[]
+}
+
+model Note {
+  id        String    @id @default(uuid())
+  title     String
+  content   String
+  fileUrl   String?
+  courseId  String
+  authorId  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  archives  Archive[]
+  author    User      @relation(fields: [authorId], references: [id])
+  course    Course    @relation(fields: [courseId], references: [id])
+}
+
+model Course {
+  id         String    @id @default(uuid())
+  name       String
+  code       String    @unique
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  notes      Note[]
+}
+
+model Category {
+  id      String   @id @default(uuid())
+  name    String   @unique
+  courses Course[]
+}
+
+model Archive {
+  id        String   @id @default(uuid())
+  userId    String
+  noteId    String
+  viewedAt  DateTime @default(now())
+  isStarred Boolean  @default(false)
+  note      Note     @relation(fields: [noteId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
