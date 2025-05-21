@@ -1,47 +1,20 @@
 import Layout from '@/modules/layout/layout'
+import NoteList from '@/modules/components/NoteList'
 import React from 'react'
 
 export default function NotePage() {
-  // Ejemplo de notas simuladas
-  const notas = [
-    {
-      titulo: 'Resumen Álgebra Lineal',
-      descripcion: 'Apuntes sobre matrices, determinantes y sistemas de ecuaciones.',
-      autor: 'María López',
-      fecha: '18 mayo 2025'
-    },
-    {
-      titulo: 'Teoría de la Computación',
-      descripcion: 'Notas sobre autómatas, gramáticas y lenguajes formales.',
-      autor: 'Pedro Ramírez',
-      fecha: '15 mayo 2025'
-    },
-    {
-      titulo: 'Derecho Constitucional',
-      descripcion: 'Resumen de los artículos principales y jurisprudencia relevante.',
-      autor: 'Ana Torres',
-      fecha: '10 mayo 2025'
-    }
-  ];
-
   return (
     <Layout>
-      <section className="mt-12">
-        <h1 className="text-3xl font-bold text-orange-700 mb-6">Notas Compartidas</h1>
-        <p className="mb-8 text-lg text-gray-700">Explora y descarga apuntes útiles de diferentes materias y cursos.</p>
-        <ul className="space-y-4">
-          {notas.map((nota, idx) => (
-            <li key={idx} className="bg-white rounded-xl p-4 border border-amber-100 shadow flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <h4 className="text-lg font-bold text-amber-700">{nota.titulo}</h4>
-                <span className="text-sm text-gray-500">{nota.descripcion}</span>
-              </div>
-              <div className="text-sm text-gray-500 mt-2 md:mt-0">
-                <span>Autor: {nota.autor}</span> | <span>Fecha: {nota.fecha}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
+      <section className="mt-16 bg-gradient-to-br from-purple-100 via-blue-50 to-white rounded-xl shadow-lg p-10">
+      <h1 className="text-4xl font-extrabold text-purple-800 mb-4 drop-shadow-lg tracking-tight">
+        📚 Notas Compartidas
+      </h1>
+      <p className="mb-10 text-xl text-gray-600 italic">
+        Descubre, comparte y descarga apuntes útiles de todas tus materias favoritas.
+      </p>
+      <div className="bg-white rounded-lg shadow p-6">
+        <NoteList />
+      </div>
       </section>
     </Layout>
   );

@@ -1,15 +1,16 @@
-// src/stores/inventory.store.ts
 import { create } from "zustand";
 import { axiosClient } from "@/services/axios.service";
-import Archive from '../app/archive/page';
 
 
 interface User {
-  id     :   String  
-  userId  :  String
-  noteId   : String
-  viewedAt : Date 
-  isStarred : Boolean
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  createdAt: string;
+  notes: any[];
+  archives: any[];
+  categoryId?: string; // Relación con categoría
 }
 
 type UserStore = {
@@ -17,16 +18,16 @@ type UserStore = {
   getInventories: () => void;
 };
 
-export const useArchiveStore = create<UserStore>((set) => ({
+export const useUserStore = create<UserStore>((set) => ({
   inventories: [],
   getInventories: async () => {
     console.log("Base URL axiosClient:", axiosClient.defaults.baseURL); // 👈 Agregado
     try {
-      const { data } = await axiosClient.get<User[]>("/archive");
+      const { data } = await axiosClient.get<User[]>("/user"); // Regresa a singular
       console.log("Datos recibidos:", data); // 👈 Opcional para confirmar que la respuesta llega
       set({ inventories: data });
     } catch (error) {
-      console.error("Error fetching archives:", error);
+      console.error("Error fetching users:", error);
     }
   },
 }));

@@ -27,24 +27,13 @@ export function useLayout(pathname: string){
         
     ];
 
-    const title = pathname === "/"
-        ? "Welcome"
-        : pathname === "/category"
-        ? "Category"
-        : pathname === "/address"
-        ? "Address"
-        : pathname === "/inventory"
-        ? "Inventory"
-        : pathname === "/notification"
-        ? "Notification"
-        : pathname === "/order"
-        ? "Order"
-        : pathname === "/order-item"
-        ? "Order Item"
-        : pathname === "/product"
-        ? "Product"
-        : "User";
-        return{
-           title, routes
-        }
+    const route = routes.find(r => r.path === pathname);
+    const title = route
+        ? route.name
+        : "Home";
+    return {
+        title,
+        routes
+    };
+
 }

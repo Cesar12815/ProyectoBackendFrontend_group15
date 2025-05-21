@@ -10,3 +10,111 @@
     -ms-overflow-style: none;  /* IE y Edge */
     scrollbar-width: none;  /* Firefox */
 }
+/* Rediseño moderno y limpio para la interfaz */
+
+/* Fondo general */
+body {
+    background: #f6f8fa;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    color: #23272f;
+}
+
+/* Contenedor principal */
+.main-container {
+    background: #1cb81f77;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+    padding: 2.5rem 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+/* Título */
+h1, h2, h3 {
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 1.5rem;
+}
+
+/* Tarjetas */
+.card {
+    background: #f9fafb;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid #e5e7eb;
+    padding: 1.5rem 1.2rem;
+    margin: 1rem 0.7rem;
+    transition: box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.card:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+}
+
+/* Botones */
+.btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: background 0.15s;
+}
+
+.btn:hover {
+    background: #1d4ed8;
+}
+
+.btn-danger {
+    background: #ef4444;
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+}
+
+/* Menú lateral */
+.sidebar {
+    background: #f1f5f9;
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    min-width: 220px;
+}
+
+.sidebar a {
+    display: block;
+    color: #23272f;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.7rem 0;
+    border-radius: 6px;
+    transition: background 0.13s, color 0.13s;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .main-container {
+        padding: 1.2rem 0.5rem;
+    }
+    .sidebar {
+        min-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+    .card {
+        margin: 1rem 0;
+    }
+}

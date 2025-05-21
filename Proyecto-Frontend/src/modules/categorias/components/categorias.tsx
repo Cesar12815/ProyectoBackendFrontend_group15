@@ -11,17 +11,17 @@ interface CategoriasProps {
 export default function Categorias({ imageSrc, title, description }: CategoriasProps) {
   return (
     <article className="rounded-xl flex flex-col gap-3 group bg-amber-50 p-4">
-      <div className="relative overflow-hidden rounded-xl max-h-96">
+      <div className="relative overflow-hidden rounded-lg shadow-lg max-h-80 border-2 border-blue-300 bg-white">
         <Image
-          width={500}
-          height={500}
+          width={400}
+          height={400}
           src={imageSrc}
           alt={title}
-          className="w-full object-cover transition-transform duration-300 group-hover:scale-110"
+          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <div className="w-full h-full opacity-0 group-hover:opacity-90 bg-neutral-900 absolute top-0 left-0 flex justify-center items-center transition-all">
-          <button className="rounded-lg p-4 opacity-0 group-hover:opacity-100 bg-neutral-700 transition-all scale-0 group-hover:scale-100 duration-300">
-            <VisibilityIcon sx={{ color: "#fef08a" }} />
+        <div className="absolute inset-0 bg-blue-900 bg-opacity-60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+          <button className="rounded-full p-3 bg-blue-500 hover:bg-blue-600 shadow-lg transition-all duration-300">
+        <VisibilityIcon sx={{ color: "#fffde4" }} />
           </button>
         </div>
       </div>

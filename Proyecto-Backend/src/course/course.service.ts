@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
@@ -8,20 +8,31 @@ export class CourseService {
   constructor(private readonly prisma: PrismaClient) {}
 
   // Método POST: Crear un nuevo curso
-async create(createCourseDto: CreateCourseDto) {
+  async create(createCourseDto: CreateCourseDto) {
     const { categoryId, ...courseData } = createCourseDto;
+
+    // Validar si categoryId fue proporcionado
+    if (categoryId) {
+      const categoryExists = await this.prisma.category.findUnique({
+        where: { id: categoryId },
+      });
+
+      if (!categoryExists) {
+        throw new NotFoundException(`Category with id ${categoryId} not found`);
+      }
+    }
 
     return this.prisma.course.create({
       data: {
         ...courseData,
         category: categoryId
           ? {
-              connect: { id: categoryId }, // Conecta el curso a la categoría si se proporciona `categoryId`
+              connect: { id: categoryId },
             }
-          : undefined, // No conecta nada si `categoryId` no está definido
+          : undefined,
       },
       include: {
-        category: true, // Incluye la información de la categoría en la respuesta
+        category: true,
       },
     });
   }
@@ -30,8 +41,8 @@ async create(createCourseDto: CreateCourseDto) {
   async findAll() {
     return this.prisma.course.findMany({
       include: {
-        notes: true, // Incluye las notas relacionadas
-        category: true, // Incluye la categoría relacionada
+        notes: true,
+        category: true,
       },
     });
   }
@@ -41,8 +52,8 @@ async create(createCourseDto: CreateCourseDto) {
     return this.prisma.course.findUnique({
       where: { id },
       include: {
-        notes: true, // Incluye las notas relacionadas
-        category: true, // Incluye la categoría relacionada
+        notes: true,
+        category: true,
       },
     });
   }
@@ -68,11 +79,11 @@ async create(createCourseDto: CreateCourseDto) {
       where: { id: courseId },
       data: {
         notes: {
-          connect: noteIds.map((id) => ({ id })), // Conecta las notas al curso
+          connect: noteIds.map((id) => ({ id })),
         },
       },
       include: {
-        notes: true, // Incluye las notas relacionadas en la respuesta
+        notes: true,
       },
     });
   }
